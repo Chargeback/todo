@@ -56,6 +56,15 @@ class TodosController < ApplicationController
     end
   end
 
+  def reporting
+    num_done = Todo.where(done: true).count
+    num_not_done = Todo.where(done: false).count
+
+    respond_to do |f|
+      f.json { render json: { done: num_done, num_not_done: num_not_done } }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_todo
